@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight, CheckCircle, Zap } from "lucide-react"
 import Image from "next/image"
+import logo from "../assets/logo_disaster_scan.jpeg"
 
 export default function LandingPage() {
   return (
@@ -72,7 +73,7 @@ export default function LandingPage() {
                 alt="Sobre o Projeto"
                 className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center"
                 height="400"
-                src="/placeholder.svg"
+                src={logo}
                 width="600"
               />
             </div>
