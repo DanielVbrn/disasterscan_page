@@ -13,6 +13,12 @@ import {
   Box,
 } from '@mui/material';
 
+// import catalisa_ict from "../../public/assets/images/catalisa_ict-removebg.png"
+// import startup_NO from "../../public/assets/images/startup_NO.png"
+// import liga_jovem from "../../public/assets/images/liga_jovem.png"
+
+import Image from "next/image"
+
 import {
   Timeline,
   TimelineItem,
@@ -29,59 +35,57 @@ import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import RocketIcon from '@mui/icons-material/Rocket';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Award, Calendar } from "lucide-react"
+import { LibraryAddOutlined } from "@mui/icons-material";
 
 const events = [
   {
     id: "1",
-    title: "Startup Weekend São Paulo",
-    date: "2023-03-15",
-    location: "São Paulo, SP",
-    type: "hackathon",
-    description: "Nosso primeiro grande evento! Desenvolvemos o MVP inicial da nossa solução em 54 horas.",
-    achievement: "2º Lugar Geral",
-    participants: 150,
+    title: "Desafio Liga Jovem",
+    date: "2024-06-20",
+    location: "Teresina, PI",
+    type: "liga_jovem",
+    description: "Nosso primeiro grande evento, onde nossa proposta avançou até a 2º fase da Liga Jovem como ideação.",
+    achievement: "Aprovados na 1º Fase",
+    participants: 54000,
     impact: "high",
   },
   {
     id: "2",
-    title: "Demo Day Acelera Partners",
-    date: "2023-05-20",
-    location: "Rio de Janeiro, RJ",
-    type: "pitch",
-    description: "Apresentação para investidores anjo e fundos de venture capital.",
-    achievement: "Melhor Pitch Técnico",
-    participants: 50,
+    title: "Startup Nordeste",
+    date: "2024-09-22",
+    location: "Teresina, PI",
+    type: "starttup_nordeste",
+    description: "Nosso segundo grande evento! Desenvolvemos um protótipo inicial e fomos aprovados em todas as fases para receber a bolsa.",
+    achievement: "Projeto aprovado na 2º e na 3 fase",
+    participants: 417,
     impact: "high",
   },
   {
     id: "3",
-    title: "Web Summit Rio",
-    date: "2023-07-10",
-    location: "Rio de Janeiro, RJ",
-    type: "conference",
-    description: "Participação como startup expositora no maior evento de tecnologia da América Latina.",
-    participants: 15000,
+    title: "Catalisa ICT",
+    date: "2025-04-08",
+    location: "Teresina, PI",
+    type: "catalisa_ict",
+    description: "Participando Atualmente",
+    achievement: "_",
+    participants: 2000,
     impact: "high",
   },
 ]
 
-const getEventIcon = (type) => {
-  const iconMap = {
-    hackathon: <LightbulbIcon />,
-    pitch: <TrackChangesIcon />,
-    conference: <PeopleIcon />,
-    workshop: <EmojiEventsIcon />,
-    award: <Award />,
-    launch: <RocketIcon />,
-    partnership: <PeopleIcon />,
+const getEventImage = (type) => {
+  const imageMap = {
+    liga_jovem: "/assets/images/liga_jovem.png",
+    startup_nordeste: "/assets/images/startup_NO.png",
+    catalisa_ict: "/assets/images/catalisa_ict-removebg.png",
   };
-  return iconMap[type] || <Calendar />;
+  return imageMap[type] || "/assets/icons/default.png";
 };
 
 
 const getEventColor = (type) => {
   const colorMap = {
-    hackathon: "secondary",
+    programa_aceleracao: "secondary",
     pitch: "primary",
     conference: "success",
     workshop: "warning",
@@ -89,7 +93,7 @@ const getEventColor = (type) => {
     launch: "error",
     partnership: "primary",
   }
-  return colorMap[type] || "default"
+  return colorMap[type] || "primary"
 }
 
 export default function StartupRoadmap() {
@@ -103,14 +107,14 @@ export default function StartupRoadmap() {
       <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
         <ButtonGroup variant="outlined">
           <Button variant={filter === "all" ? "contained" : "outlined"} onClick={() => setFilter("all")}>
-            Todos
+            Programas que Participamos
           </Button>
-          <Button variant={filter === "hackathon" ? "contained" : "outlined"} onClick={() => setFilter("hackathon")}>
-            Hackathons
+          {/* <Button variant={filter === "Programas de Aceleração" ? "contained" : "outlined"} onClick={() => setFilter("all")}>
+            Programas de Aceleração
           </Button>
           <Button variant={filter === "pitch" ? "contained" : "outlined"} onClick={() => setFilter("pitch")}>
-            Pitches
-          </Button>
+            Eventos
+          </Button> */}
         </ButtonGroup>
       </Box>
 
@@ -119,7 +123,13 @@ export default function StartupRoadmap() {
         {filteredEvents.map((event, index) => (
           <TimelineItem key={event.id}>
             <TimelineSeparator>
-              <TimelineDot color={getEventColor(event.type)}>{getEventIcon(event.type)}</TimelineDot>
+              {/* <Image
+                src={getEventImage(event.type)}
+                alt={event.type}
+                width={40}
+                height={40}
+                className={getEventColor(event.type)}
+              /> */}
               {index < filteredEvents.length - 1 && <TimelineConnector />}
             </TimelineSeparator>
             <TimelineContent>

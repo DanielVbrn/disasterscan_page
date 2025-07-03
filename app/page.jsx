@@ -4,17 +4,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowRight, CheckCircle, Zap } from "lucide-react"
-import logo from "../assets/logo_disaster_scan.jpeg"
+import logo from "../public/assets/logo_disaster_scan.jpeg"
 
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import StartupRoadmap from '@/app/roadmap/startup-roadmap'
+import { members } from './team'
+
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isContactOpen, setIsContactOpen] = useState(false)
-  
+
   // Handle header scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -41,14 +43,13 @@ export default function LandingPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <motion.header 
-        className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
-          isScrolled ? 'bg-background/80 shadow-md' : 'bg-background/95'
-        } backdrop-blur supports-[backdrop-filter]:bg-background/60`}
+      <motion.header
+        className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${isScrolled ? 'bg-background/80 shadow-md' : 'bg-background/95'
+          } backdrop-blur supports-[backdrop-filter]:bg-background/60`}
         style={{ opacity: headerOpacity }}
       >
         <div className="container flex h-14 items-center">
-          <motion.div 
+          <motion.div
             className="mr-4 flex items-center"
             whileHover={{ scale: 1.05 }}
           >
@@ -62,13 +63,13 @@ export default function LandingPage() {
                 href={`#${section}`}
                 className="hover:text-primary transition-colors"
                 onClick={(e) => handleNavClick(e, `#${section}`)}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </motion.a>
             ))}
-            <Button 
+            <Button
               onClick={() => setIsContactOpen(true)}
               className="hover:scale-105 transition-transform"
             >
@@ -80,7 +81,7 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <motion.section 
+        <motion.section
           className="w-full py-12 md:py-24 lg:py-32 xl:py-48"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -88,34 +89,42 @@ export default function LandingPage() {
         >
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <motion.h1 
-                  className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none"
-                  initial={{ y: -20, opacity: 0 }}
+              <div className="space-y-6 text-center">
+                <motion.h1
+                  className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+                  initial={{ y: -30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
                 >
-                  DisasterScan - Prevendo e Recuperando de Catástrofes Ambientais
+                  <span className="block mb-2">
+                    <span className="bg-gradient-to-r from-green-500 via-green-800 to-amber-900 bg-clip-text text-transparent text-8xl">
+                      DisasterScan
+                    </span>
+                  </span>
+                  <span className="block text-6xl">Prevendo e Recuperando de Catástrofes Ambientais</span>
                 </motion.h1>
-                <motion.p 
-                  className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400"
-                  initial={{ y: 20, opacity: 0 }}
+
+                <motion.p
+                  className="mx-auto max-w-2xl text-gray-600 dark:text-gray-300 text-lg md:text-xl leading-relaxed backdrop-blur-sm bg-white/30 dark:bg-black/30 px-4 py-2 rounded-lg"
+                  initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ duration: 0.8, ease: 'easeOut', delay: 0.3 }}
                 >
-                  Solução completa para previsão, atuação e recuperação rápida de desastres ambientais, apoiando pessoas e órgãos governamentais.
+                  Solução completa para previsão, atuação e recuperação rápida de desastres ambientais,
+                  apoiando pessoas e órgãos governamentais.
                 </motion.p>
               </div>
+
               <div className="space-x-4">
                 <Button size="lg" className="hover:scale-105 transition-transform">
                   Comece Agora
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="hover:scale-105 transition-transform"
-                  onClick={() => handleNavClick(new Event('click') , '#about')}
+                  onClick={() => handleNavClick(new Event('click'), '#about')}
                 >
                   Saiba Mais
                 </Button>
@@ -125,8 +134,8 @@ export default function LandingPage() {
         </motion.section>
 
         {/* About Section */}
-        <motion.section 
-          id="about" 
+        <motion.section
+          id="about"
           className="w-full bg-muted py-12 md:py-24 lg:py-32"
           variants={cardVariants}
           initial="hidden"
@@ -160,8 +169,8 @@ export default function LandingPage() {
         </motion.section>
 
         {/* Problem Section */}
-        <motion.section 
-          id="problem" 
+        <motion.section
+          id="problem"
           className="w-full py-12 md:py-24 lg:py-32"
           variants={cardVariants}
           initial="hidden"
@@ -183,8 +192,8 @@ export default function LandingPage() {
                   "Impacto ambiental elevado",
                   "Falta de ferramentas integradas",
                 ].map((problem) => (
-                  <motion.div 
-                    key={problem} 
+                  <motion.div
+                    key={problem}
                     className="flex flex-col items-center space-y-2 rounded-lg border p-4 text-center"
                     variants={cardVariants}
                     whileHover="hover"
@@ -199,8 +208,8 @@ export default function LandingPage() {
         </motion.section>
 
         {/* Solution Section */}
-        <motion.section 
-          id="solution" 
+        <motion.section
+          id="solution"
           className="w-full bg-muted py-12 md:py-24 lg:py-32"
           variants={cardVariants}
           initial="hidden"
@@ -224,8 +233,8 @@ export default function LandingPage() {
                   "Integração com órgãos governamentais",
                   "Recuperação eficaz",
                 ].map((solution) => (
-                  <motion.div 
-                    key={solution} 
+                  <motion.div
+                    key={solution}
                     className="flex flex-col items-center space-y-2 rounded-lg border p-4 text-center"
                     variants={cardVariants}
                     whileHover="hover"
@@ -240,10 +249,12 @@ export default function LandingPage() {
         </motion.section>
 
         {/*RoadMap Section*/}
-        <StartupRoadmap/>
+        <StartupRoadmap />
+
+
         {/* Team Section */}
-        <motion.section 
-          id="team" 
+        <motion.section
+          id="team"
           className="w-full py-12 md:py-24 lg:py-32"
           variants={cardVariants}
           initial="hidden"
@@ -259,16 +270,9 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="mx-auto grid max-w-5xl gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
-                {[
-                  { name: "João Pedro", role: "Desenvolvedor Full Stack", image: "/placeholder.svg" },
-                  { name: "Daniel Vitor", role: "Especialista em IA", image: "/placeholder.svg" },
-                  { name: "Lays Emanuelly", role: "Designer UX/UI", image: "/placeholder.svg" },
-                  { name: "Alexandro", role: "Cientista de Dados", image: "/placeholder.svg" },
-                  { name: "Duanny Dreyton", role: "Engenheiro de Software", image: "/placeholder.svg" },
-                  { name: "Giovanna Lima", role: "Gestora de Projetos", image: "/placeholder.svg" },
-                ].map((member) => (
-                  <motion.div 
-                    key={member.name} 
+                {members.map((member) => (
+                  <motion.div
+                    key={member.name}
                     className="flex flex-col items-center space-y-4 rounded-lg border p-4"
                     variants={cardVariants}
                     whileHover={{ scale: 1.05, boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
@@ -292,7 +296,7 @@ export default function LandingPage() {
         </motion.section>
 
         {/* CTA Section */}
-        <motion.section 
+        <motion.section
           className="w-full bg-muted py-12 md:py-24 lg:py-32"
           variants={cardVariants}
           initial="hidden"
@@ -307,8 +311,8 @@ export default function LandingPage() {
                   Estamos sempre em busca de novas parcerias e apoio para continuar nosso trabalho em prol de salvar mais vidas.
                 </p>
               </div>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="hover:scale-105 transition-transform"
                 onClick={() => setIsContactOpen(true)}
               >
@@ -325,31 +329,31 @@ export default function LandingPage() {
           <DialogHeader>
             <DialogTitle>Entre em Contato</DialogTitle>
             <DialogDescription>
-              Preencha o formulário abaixo e entraremos em contato em breve.
+              Para mais informações, entre em contato pelos canais abaixo:
             </DialogDescription>
           </DialogHeader>
+
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="name" className="text-right">Nome</label>
-              <input id="name" className="col-span-3 rounded-md border p-2" />
+            <div className="flex items-center gap-2">
+              <span className="font-semibold">📧 Email:</span>
+              <span>disasterscan@gmail.com</span>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="email" className="text-right">Email</label>
-              <input id="email" className="col-span-3 rounded-md border p-2" />
+
+            <div className="flex items-center gap-2">
+              <span className="font-semibold">📞 Telefone:</span>
+              <span>(86) 98145-3069</span>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="message" className="text-right">Mensagem</label>
-              <textarea id="message" className="col-span-3 rounded-md border p-2" rows={4} />
-            </div>
-            <Button 
-              className="hover:scale-105 transition-transform"
-              onClick={() => setIsContactOpen(false)}
-            >
-              Enviar
-            </Button>
           </div>
+
+          <Button
+            className="hover:scale-105 transition-transform"
+            onClick={() => setIsContactOpen(false)}
+          >
+            Fechar
+          </Button>
         </DialogContent>
       </Dialog>
+
     </div>
   )
 }
